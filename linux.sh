@@ -28,8 +28,6 @@ echo "*************************************"
 echo "Adding the needed keys and repositories"
 echo "*************************************"
 sudo add-apt-repository ppa:numix/ppa -y
-sudo add-apt-repository ppa:libreoffice/ppa -y
-sudo add-apt-repository ppa:jonathonf/firefox-esr -y
 wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add - 
 sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
 wget -O - http://deb.opera.com/archive.key | sudo apt-key add -
@@ -62,7 +60,7 @@ echo
 echo "*******************************************"
 echo "**** Installing ALL packages ****"
 echo "*******************************************"
-sudo apt install git vlc unrar p7zip numix-icon-theme-circle browser-plugin-freshplayer-pepperflash firefox-esr chrome-stable opera spotify-client audacious playonlinux chromium-browser xfce4-screenshooter soundconverter -y
+sudo apt install git vlc unrar p7zip numix-icon-theme-circle browser-plugin-freshplayer-pepperflash google-chrome-stable opera spotify-client playonlinux chromium-browser xfce4-screenshooter soundconverter -y
 printf 'DONE    ...    Elapsed time: %s \n\n' $(timer $t)
 
 t=$(timer)
@@ -88,12 +86,8 @@ mkdir Apps
 cd Apps
 wget https://telegram.org/dl/desktop/linux
 tar -xvf linux
-wget http://kdl1.cache.wps.com/ksodl/download/linux/a21//wps-office_10.1.0.5707~a21_amd64.deb
-sudo dpkg -i *.deb
 wget https://www.dropbox.com/s/7qh902qv2sxyp6p/SoulseekQt-2016-1-17-64bit.tgz
 tar -zxvf SoulseekQt-2016-1-17-64bit.tgz
-wget https://www.torproject.org/dist/torbrowser/7.0.3/tor-browser-linux64-7.0.3_en-US.tar.xz
-tar -xvJf tor-browser-linux64-7.0.3_en-US.tar.xz
 printf 'DONE    ...    Elapsed time: %s \n\n' $(timer $t)
 
 
