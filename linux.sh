@@ -28,10 +28,9 @@ echo "*************************************"
 echo "Adding the needed keys and repositories"
 echo "*************************************"
 sudo add-apt-repository ppa:numix/ppa -y
+sudo add-apt-repository ppa:ubuntu-mozilla-daily/ppa -y
 wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add - 
 sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
-wget -O - http://deb.opera.com/archive.key | sudo apt-key add -
-sudo sh -c 'echo "deb http://deb.opera.com/opera-stable/ stable non-free" >> /etc/apt/sources.list.d/opera.list' 
 sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys BBEBDCB318AD50EC6865090613B00F1FD2C19886 0DF731E45CE24F27EEEB1450EFDC8610341D9410
 echo deb http://repository.spotify.com stable non-free | sudo tee /etc/apt/sources.list.d/spotify.list
 printf 'DONE    ...    Elapsed time: %s \n\n' $(timer $t)
@@ -60,7 +59,7 @@ echo
 echo "*******************************************"
 echo "**** Installing ALL packages ****"
 echo "*******************************************"
-sudo apt install git vlc unrar p7zip numix-icon-theme-circle browser-plugin-freshplayer-pepperflash google-chrome-stable opera spotify-client playonlinux chromium-browser xfce4-screenshooter soundconverter -y
+sudo apt install git vlc unrar p7zip numix-icon-theme-circle browser-plugin-freshplayer-pepperflash google-chrome-stable spotify-client playonlinux chromium-browser xfce4-screenshooter soundconverter firefox-trunk unity-tweak-tool -y
 printf 'DONE    ...    Elapsed time: %s \n\n' $(timer $t)
 
 t=$(timer)
@@ -71,7 +70,7 @@ echo "**** Installing *.deb packages ****"
 echo "*******************************************"
 cd /media/paulo/F814-8F32/install/Linux/
 sudo dpkg -i *.deb
-sudo apt install -f
+sudo apt install -f -y
 sudo dpkg -i *.deb
 cd
 printf 'DONE    ...    Elapsed time: %s \n\n' $(timer $t)
@@ -82,6 +81,7 @@ echo
 echo "*******************************************"
 echo "**** Installing Apps on /home/Apps/"
 echo "*******************************************"
+cd /home/paulo/
 mkdir Apps
 cd Apps
 wget https://telegram.org/dl/desktop/linux
@@ -99,6 +99,24 @@ echo "**** Removing all unecessary packages ****"
 echo "*******************************************"
 sudo apt autoremove -y
 printf 'DONE    ...    Elapsed time: %s \n\n' $(timer $t)
+
+t=$(timer)
+echo
+echo
+echo "*******************************************"
+echo "**** Fixing swap ****"
+echo "*******************************************"
+sudo bash -c "echo 'vm.swappiness = 10' >> /etc/sysctl.conf"
+printf 'DONE    ...    Elapsed time: %s \n\n' $(timer $t)
+
+t=$(timer)
+echo
+echo
+echo "*******************************************"
+echo "**** Add stuff in fstab ****"
+echo "*******************************************"
+sudo chown -R paulo /media/paulo/stuff
+sudo echo "UUID="44FA2DB0FA2D9F64" /media/paulo/stuff ntfs-3g defaults 0 0" >> /etc/fstab
 
 echo "\n\n\n"
 echo "********************************"
