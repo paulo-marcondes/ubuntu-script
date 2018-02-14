@@ -28,7 +28,6 @@ echo "*************************************"
 echo "Adding the needed keys and repositories"
 echo "*************************************"
 sudo add-apt-repository ppa:numix/ppa -y
-sudo add-apt-repository ppa:ubuntu-mozilla-daily/ppa -y
 wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add - 
 sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
 sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys BBEBDCB318AD50EC6865090613B00F1FD2C19886 0DF731E45CE24F27EEEB1450EFDC8610341D9410
@@ -59,7 +58,7 @@ echo
 echo "*******************************************"
 echo "**** Installing ALL packages ****"
 echo "*******************************************"
-sudo apt install git vlc unrar p7zip numix-icon-theme-circle browser-plugin-freshplayer-pepperflash google-chrome-stable spotify-client playonlinux chromium-browser xfce4-screenshooter soundconverter firefox-trunk unity-tweak-tool -y
+sudo apt install git vlc unrar p7zip numix-icon-theme-circle browser-plugin-freshplayer-pepperflash google-chrome-stable spotify-client xfce4-screenshooter soundconverter unity-tweak-tool -y
 printf 'DONE    ...    Elapsed time: %s \n\n' $(timer $t)
 
 t=$(timer)
@@ -81,6 +80,7 @@ echo
 echo "*******************************************"
 echo "**** Installing Apps on /home/Apps/"
 echo "*******************************************"
+sudo -i
 cd /home/paulo/
 mkdir Apps
 cd Apps
@@ -116,7 +116,7 @@ echo "*******************************************"
 echo "**** Add stuff in fstab ****"
 echo "*******************************************"
 sudo chown -R paulo /media/paulo/stuff
-sudo echo "UUID="44FA2DB0FA2D9F64" /media/paulo/stuff ntfs-3g defaults 0 0" >> /etc/fstab
+sudo echo "UUID="2462D3AC62D380CA" /media/paulo/stuff ntfs-3g defaults 0 0" >> /etc/fstab
 
 echo "\n\n\n"
 echo "********************************"
